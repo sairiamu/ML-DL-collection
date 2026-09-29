@@ -1,0 +1,32 @@
+run_name: exp
+out_dir: runs
+device: 0            # "cpu" if no GPU
+imgsz: 640
+data: ???            # path to dataset yaml (YOLO format)
+weights: null        # set to skip finetune and start from an existing .pt
+
+pipeline: []
+
+finetune:
+  base_weights: yolo11n.pt
+  strategy: freeze   # none | freeze | lora
+  freeze_layers: 10  # backbone depth when strategy=freeze
+  epochs: 50
+  batch: 16
+  patience: 15
+  extra: {}          # any extra Ultralytics train kwargs
+
+export:
+  onnx: true
+  tflite: true
+  opset: 17
+  simplify: true
+  precision: fp16    # fp32 | fp16 | int8
+  calib_fraction: 0.1  # portion of the dataset used for INT8 calibration
+
+validate:
+  latency_runs: 50
+  threads: 4
+
+package:
+  dir: artifacts

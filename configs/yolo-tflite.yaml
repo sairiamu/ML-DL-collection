@@ -1,0 +1,15 @@
+defaults_from: base.yaml
+run_name: my_detector
+data: /data/my_dataset/data.yaml
+imgsz: 640
+
+pipeline: [finetune, export, validate, package]
+
+finetune:
+  base_weights: yolo11n.pt
+  strategy: freeze
+  freeze_layers: 10
+  epochs: 40
+
+export:
+  precision: fp16

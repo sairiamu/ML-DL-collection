@@ -1,0 +1,15 @@
+[project]
+name = "mlpipe"
+version = "0.1.0"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+  "ultralytics>=8.3",
+  "omegaconf",
+  "onnx", "onnxslim", "onnxruntime",
+  "onnx2tf", "sng4onnx", "onnx_graphsurgeon", "tf_keras",
+  "tensorflow>=2.16,<=2.19",
+  "ai-edge-litert",
+]
+
+[tool.setuptools]
+packages = ["mlpipe", "mlpipe.stages"]
